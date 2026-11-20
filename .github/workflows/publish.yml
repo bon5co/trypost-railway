@@ -26,4 +26,4 @@ jobs:
           provenance: false
           tags: |
             ghcr.io/bon5co/trypost-railway:2.1.0
-            ghcr.io/bon5co/pretix-railway:latest
+            ghcr.io/bon5co/trypost-railway:latest
