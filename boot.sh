@@ -3,6 +3,10 @@
 set -e
 cd /var/www/html
 
+# Railway ignores OCI whiteouts, so the dev-time package manifest that upstream deleted in a later layer comes back and
+# names laravel/pail, which production does not install: drop both caches and let Laravel rebuild them from vendor/
+rm -f bootstrap/cache/packages.php bootstrap/cache/services.php
+
 need() { eval "v=\${$1:-}"; [ -n "$v" ] || { echo "[railway-boot] $1 is required" >&2; exit 1; }; }
 for n in APP_URL APP_SECRET DB_HOST DB_USERNAME DB_PASSWORD DB_DATABASE REDIS_HOST REDIS_PASSWORD REVERB_APP_SECRET ADMIN_EMAIL ADMIN_PASSWORD; do need "$n"; done
 
